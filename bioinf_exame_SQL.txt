@@ -1,0 +1,28 @@
+
+Oefening 10 SQL Query's en antwoorden
+
+SELECT gene_name, seq_region_end-seq_region_start+1 as length FROM gene ORDER BY length desc limit 1;
+ANTWOORD :
+# gene_name, length
+'TMPRSS3', '5379014'
+
+SELECT gene.gene_name, count(transcript_id) as transcript_count FROM gene JOIN transcript ON gene.gene_id = transcript.gene_id GROUP BY gene.gene_name ORDER BY transcript_count desc limit 1;
+ANTWOORD:
+# gene_name, transcript_count
+'U6', '1329'
+
+SELECT chromosome, count(*) as count_gene FROM gene WHERE description like '%cancer%' GROUP by chromosome ORDER BY count_gene desc LIMIT 1 OFFSET 1;
+ANTWOORD:
+# chromosome, count_gene
+'9', '5'
+SELECT gene.chromosome, count(*) as exon_count FROM gene JOIN transcript ON gene.gene_id = transcript.gene_id JOIN exon_transcript ON transcript.transcript_id = exon_transcript.transcript_id JOIN exon ON exon_transcript.exon_id = exon.exon_id WHERE gene.chromosome="9" GROUP BY gene.chromosome;
+ANTWOORD:
+# chromosome, exon_count
+'9', '45679'
+
+SELECT count(*) FROM exon;
+ANTWOORD aantal rijen: 642590
+SELECT count(*) FROM exon_transcript;
+ANTWOORD aantal rijen: 1178393
+ANTWOORD : Door splice varanten. 
+
