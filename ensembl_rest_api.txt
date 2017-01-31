@@ -1,0 +1,7 @@
+curl 'https://rest.ensembl.org/variation/mus_musculus/rs4224828' -H 'Content-type:text/xml'
+ANTWOORD:
+location="4:136443949-136443949"
+
+
+/
+
