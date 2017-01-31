@@ -1,0 +1,17 @@
+UNF [ Pers_nr, Naam, Geboorte_Datum, Labocode, Labonaam, ProjectCode, Projectomschrijving, Projectsupervisor ]
+
+1NF 
+[ Pers_nr, Naam, Geboorte_Datum, Labocode, Labonaam ]
+[ ProjectCode, Projectomschrijving, Projectsupervisor]
+
+KEY [ Pers_nr - ProjectCode ]
+
+2NF 
+[ Pers_nr, ProjectCode, Labcode ]
+[ Pers_nr, Naam, Geboorte_Datum ]
+[ ProjectCode, Projectomschrijving, Projectsupervisor]
+[ Labcode, Labonaam ]
+
+KEY [ Pers_nr,ProjectCode - Pers_nr - Projectcode - Labocode ]
+
+2NF = 3NF
