@@ -1,0 +1,25 @@
+db.getCollection('bioinf_mongo_examen').find({"method_of_admission":"GEL;DENTAL"})
+ANTWOORD: 1
+
+db.getCollection('bioinf_mongo_examen').find({"percentage_of_side_effects":{$gt:8}}).count()
+ANTWOORD: 399
+
+db.getCollection('bioinf_mongo_examen').aggregate([{$group:{_id:"$company", MeanSideEffect: {$avg: "$percentage_of_side_effects"}}},{$match: {MeanSideEffect:{$gt:10}}},{ $sort : { MeanSideEffect : -1} }])
+ANTWOORD:
+/* 1 */
+{
+    "_id" : "Galderma Laboratories, L.P.",
+    "MeanSideEffect" : 11.5
+}
+/* 2 */
+{
+    "_id" : "Watson Pharmaceuticals, Inc.",
+    "MeanSideEffect" : 10.65
+}
+/* 3 */
+{
+    "_id" : "Durata Therapeutics, Inc.",
+    "MeanSideEffect" : 10.5
+}
+
+db.getCollection('bioinf_mongo_examen').aggregate([{$group:{_id:"$company", MinSideEffect: {$min: "$percentage_of_side_effects"}, MaxSideEffect: {$max: "$percentage_of_side_effects"}, count: {$sum:1}}},{$match: {count:{$gt:1}}}])
